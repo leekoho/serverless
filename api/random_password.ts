@@ -12,6 +12,8 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     symbols === "1" ? "!@#$%^&*" : ""
   }`;
 
+  res.setHeader("Content-Type", "text/plain");
+
   return res.send(
     ""
       .padStart(Number(length))

@@ -15,7 +15,6 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     // font size
     fz,
   } = req.query;
-  // 
   const _w = ~~Number(w) || 200;
   const _h = ~~Number(h) || 200;
   const _text = text || `${_w} X ${_h}`;
@@ -35,11 +34,11 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       </text>
     </svg>`
       // compresses
-      .replace(/(\n|\r|\t)/g, "")
+      .replace(/[\n\r\t]/g, "")
       .replace(/\s*(<|\/>|\/?>)\s*/g, "$1")
       .replace(/\s+/g, " ");
 
-  res.setHeader("content-type", "image/svg+xml;charset=utf-8");
+  res.setHeader("Content-Type", "image/svg+xml");
 
   res.send(svg);
 }
