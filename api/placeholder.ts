@@ -25,6 +25,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       <rect width="${_w}" height="${_h}" fill="${bg}" />
       <text 
         text-anchor="middle"
+        dominant-baseline="central"
         x="${~~(_w / 2)}"
         y="${~~(_h / 2)}"
         font-size="${_fz}px"
