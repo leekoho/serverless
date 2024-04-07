@@ -33,6 +33,13 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       >
         ${_text}
       </text>
+      <style>
+        text {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji;
+        }
+</style>
     </svg>`
       // compresses
       .replace(/[\n\r\t]/g, '')

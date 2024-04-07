@@ -2,6 +2,7 @@
   "repository": "https://github.com/vercel/examples.git",
   "license": "MIT",
   "private": true,
+  "type": "module",
   "prettier": "@leekoho/prettier-config",
   "devDependencies": {
     "@leekoho/prettier-config": "^1.0.1",
