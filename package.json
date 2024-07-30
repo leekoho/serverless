@@ -10,5 +10,8 @@
     "@vercel/node": "^3.0.25",
     "prettier": "^3.2.5",
     "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "jsdom": "^24.1.1"
   }
 }
