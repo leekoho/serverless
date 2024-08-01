@@ -6,10 +6,10 @@
   "prettier": "@leekoho/prettier-config",
   "devDependencies": {
     "@leekoho/prettier-config": "^1.0.1",
-    "@types/node": "^20.12.2",
-    "@vercel/node": "^3.0.25",
-    "prettier": "^3.2.5",
-    "typescript": "^5.4.3"
+    "@types/node": "^22.0.2",
+    "@vercel/node": "^3.2.7",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "jsdom": "^24.1.1"
