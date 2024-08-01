@@ -13,8 +13,7 @@ export default (req: VercelRequest, res: VercelResponse) => {
   }`
 
   res.setHeader('Content-Type', 'text/plain')
-
-  return res.send(
+  res.send(
     ''
       .padStart(Number(length))
       .replace(/\s/g, () => chars[Math.floor(Math.random() * chars.length)])

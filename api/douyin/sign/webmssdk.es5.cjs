@@ -11305,8 +11305,4 @@ if (!window.byted_acrawler) {
   })
 }
 
-function getSign(param) {
-  return window._0x5c2014(param)
-}
-
-module.exports = getSign
+module.exports = window._0x5c2014

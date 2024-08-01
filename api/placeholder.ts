@@ -47,6 +47,5 @@ export default (req: VercelRequest, res: VercelResponse) => {
       .replace(/\s+/g, ' ')
 
   res.setHeader('Content-Type', 'image/svg+xml')
-
   res.send(svg)
 }

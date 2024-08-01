@@ -4,7 +4,9 @@
     "module": "ESNext",
     "moduleResolution": "Node",
     "strict": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "esModuleInterop": true, // 为导入内容创建命名空间，实现CommonJS和ES模块之间的互操作性。,
+    "allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入。
   },
-  "include": ["api/*.ts", "shared/*.ts", "shared/sign.cjs"]
+  "include": ["api/*.ts", "shared/*.ts"],
 }
