@@ -43,6 +43,8 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 
   const cookies = response.headers.getSetCookie().at(0)
 
+  const ttwid = cookies?.match(/ttwid=(.*?);/)?.at(1)
+
   const roomId = html.match(/"roomId":"(.*?)"/)?.at(1)
 
   if (!roomId) {
@@ -50,6 +52,9 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   }
 
   const userUniqueId = html.match(/"user_unique_id":"(.*?)"/)?.at(1)
+  const title = html.match(/,"title":"(.*?)"/)?.at(1)
+  const nickname = html.match(/"nickname":"(.*?)"/)?.at(1)
+  const avatar = html.match(/"avatar_thumb":\{"url_list":\["(.*?)"/)?.at(1)
 
   const timestamp = Date.now()
 
@@ -102,13 +107,15 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 
   params.set('signature', signature['X-Bogus'])
 
+  const wssUrl = decodeURIComponent(`wss://${hostname}/webcast/im/push/v2/?${params}`)
+
   res.json({
     roomId,
     userUniqueId,
-    wssUrl: decodeURIComponent(`wss://${hostname}/webcast/im/push/v2/?${params}`),
-    ttwid: cookies?.match(/ttwid=(.*?);/)?.at(1),
-    title: html.match(/,"title":"(.*?)"/)?.at(1),
-    nickname: html.match(/"nickname":"(.*?)"/)?.at(1),
-    avatar: html.match(/"avatar_thumb":\{"url_list":\["(.*?)"/)?.at(1),
+    title,
+    nickname,
+    avatar,
+    ttwid,
+    wssUrl,
   })
 }
