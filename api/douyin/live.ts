@@ -1,9 +1,14 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { createHash } from 'node:crypto'
-import frontierSign from './sign/webmssdk.es5.cjs'
+// @ts-ignore
+// import ba from './signature/byted_acrawler.cjs'
+// @ts-ignore
+import webmssdk from './signature/webmssdk.es5.cjs'
+
+// const byted_acrawler = ba.default
 
 const USER_AGENT =
-  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36'
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
 
 const websocketKeys = [
   'live_id',
@@ -23,15 +28,49 @@ const websocketKeys = [
 
 const md5 = (data: string) => createHash('md5').update(data, 'utf-8').digest('hex')
 
-export default async (req: VercelRequest, res: VercelResponse) => {
-  const { liveId = '325725889409' } = req.query
+const getAcNonce = async (url: string) => {
+  const response = await fetch(url, {
+    headers: {
+      'User-Agent': USER_AGENT,
+    },
+  })
+  const cookies = response.headers.get('set-cookie')
 
-  const url = `https://live.douyin.com/${liveId}`
+  return cookies?.match(/__ac_nonce=(.*?);/)?.at(1)
+}
+
+export default async (req: VercelRequest, res: VercelResponse) => {
+  const { liveId } = req.query
+
+  if (!liveId) {
+    return res.status(400).json({ message: 'Missing liveId' })
+  }
+
+  const baseUrl = 'https://live.douyin.com/'
+
+  const url = `${baseUrl}${liveId}`
+
+  // byted_acrawler.init({ aid: 99999999, dfp: 0 })
+
+  const __ac_nonce = await getAcNonce(url)
+
+  const cookieObj = {
+    __ac_nonce,
+    __ac_ns: Date.now(),
+    __ac_referer: baseUrl || '__ac_blank',
+    // __ac_signature: byted_acrawler.sign('', __ac_nonce),
+  }
 
   const response = await fetch(url, {
     headers: {
       'User-Agent': USER_AGENT,
-      Cookie: '__ac_nonce=063abcffaoed8507d599',
+      Accept:
+        'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+      'Accept-Language': 'h-CN,zh;q=0.9,en;q=0.8',
+      referer: 'https://live.douyin.com/',
+      Cookie: Object.entries(cookieObj)
+        .map(([key, value]) => `${key}=${value}`)
+        .join(';'),
     },
   })
 
@@ -41,17 +80,17 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     return res.status(404).json({ message: `${url} fetch fail` })
   }
 
-  const cookies = response.headers.getSetCookie().at(0)
+  const cookies = response.headers.get('set-cookie')
 
   const ttwid = cookies?.match(/ttwid=(.*?);/)?.at(1)
 
-  const roomId = html.match(/"roomId":"(.*?)"/)?.at(1)
+  const roomId = html.match(/"roomId":"(\d*?)"/)?.at(1)
 
   if (!roomId) {
     return res.status(404).json({ message: 'Live not found' })
   }
 
-  const userUniqueId = html.match(/"user_unique_id":"(.*?)"/)?.at(1)
+  const userUniqueId = html.match(/"user_unique_id":"(\d*?)"/)?.at(1)
   const title = html.match(/,"title":"(.*?)"/)?.at(1)
   const nickname = html.match(/"nickname":"(.*?)"/)?.at(1)
   const avatar = html.match(/"avatar_thumb":\{"url_list":\["(.*?)"/)?.at(1)
@@ -61,8 +100,10 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   const hostnames = [
     'webcast3-ws-web-hl.douyin.com',
     'webcast3-ws-web-lf.douyin.com',
-    'webcast100-ws-web-lq.amemv.com',
     'webcast3-ws-web-lq.douyin.com',
+    'webcast100-ws-web-lq.amemv.com',
+    'webcast100-ws-web-hl.amemv.com',
+    'webcast100-ws-web-lf.amemv.com',
   ]
 
   const hostname = hostnames.at(Math.floor(Math.random() * hostnames.length))
@@ -83,7 +124,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     browser_version: USER_AGENT,
     browser_online: 'true',
     tz_name: 'Asia/Shanghai',
-    cursor: `t-${timestamp}_r-1_d-1_u-1_fh-7397971688119882802`,
+    cursor: `h-1_t-${timestamp}_r-1_d-1_u-1`,
     internal_ext: `internal_src:dim|wss_push_room_id:${roomId}|wss_push_did:${userUniqueId}|first_req_ms:${timestamp - 80}|fetch_time:${timestamp}|seq:1|wss_info:0-${timestamp}-0-0|wrds_v:7397978801109468886`,
     host: 'https://live.douyin.com',
     aid: '6383',
@@ -92,7 +133,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     endpoint: 'live_pc',
     support_wrds: '1',
     user_unique_id: `${userUniqueId}`,
-    im_path: '/webcast/im/fetch',
+    im_path: '/webcast/im/fetch/',
     identity: 'audience',
     need_persist_msg_count: '15',
     insert_task_id: '',
@@ -101,8 +142,8 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     heartbeatDuration: '0',
   })
 
-  const signature = frontierSign({
-    'X-MS-STUB': md5(websocketKeys.map(key => `${key}=${params.get(key) || ''}`).join()),
+  const signature = webmssdk.frontierSign({
+    'X-MS-STUB': md5(websocketKeys.map((key) => `${key}=${params.get(key) ?? ''}`).join()),
   })
 
   params.set('signature', signature['X-Bogus'])
