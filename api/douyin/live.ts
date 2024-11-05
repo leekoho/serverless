@@ -1,9 +1,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
-import { createHash } from 'node:crypto'
 // @ts-ignore
 // import ba from './signature/byted_acrawler.cjs'
 // @ts-ignore
-import webmssdk from './signature/webmssdk.es5.cjs'
+import webmssdk from '../../shared/signature/webmssdk.es5.cjs'
+import { md5 } from '../../shared/utils/md5.js'
 
 // const byted_acrawler = ba.default
 
@@ -25,8 +25,6 @@ const websocketKeys = [
   'ac',
   'identity',
 ]
-
-const md5 = (data: string) => createHash('md5').update(data, 'utf-8').digest('hex')
 
 const getAcNonce = async (url: string) => {
   const response = await fetch(url, {
