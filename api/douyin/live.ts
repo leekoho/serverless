@@ -92,6 +92,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
   const title = html.match(/,"title":"(.*?)"/)?.at(1)
   const nickname = html.match(/"sec_uid":"(([a-zA-Z0-9-_])+)","nickname":"(.*?)"/)?.at(-1)
   const avatar = html.match(/"avatar_thumb":\{"url_list":\["(.*?)"/)?.at(1)
+  const userCountStr = html.match(/"user_count_str":"(.*?)"/)?.at(1)
 
   const timestamp = Date.now()
 
@@ -154,6 +155,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
     title,
     nickname,
     avatar,
+    userCountStr,
     ttwid,
     wssUrl,
   })
