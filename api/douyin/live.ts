@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 // @ts-ignore
-// import ba from './signature/byted_acrawler.cjs'
+// import ba from '../../shared/signature/byted_acrawler.cjs'
 // @ts-ignore
 import webmssdk from '../../shared/signature/webmssdk.es5.cjs'
 import { md5 } from '../../shared/utils/md5.js'
@@ -8,7 +8,7 @@ import { md5 } from '../../shared/utils/md5.js'
 // const byted_acrawler = ba.default
 
 const USER_AGENT =
-  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
+  '5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 
 const websocketKeys = [
   'live_id',
@@ -107,11 +107,13 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 
   const hostname = hostnames.at(Math.floor(Math.random() * hostnames.length))
 
+  const K_VERSION = '1.0.14-beta.0'
+
   const params = new URLSearchParams({
     app_name: 'douyin_web',
     version_code: '180800',
-    webcast_sdk_version: '1.0.14-beta.0',
-    update_version_code: '1.0.14-beta.0',
+    webcast_sdk_version: K_VERSION,
+    update_version_code: K_VERSION,
     compress: 'gzip',
     device_platform: 'web',
     cookie_enabled: 'true',

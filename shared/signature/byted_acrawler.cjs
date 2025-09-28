@@ -1,43 +1,25 @@
 const jsdom = require('jsdom')
 const { JSDOM } = jsdom
-const dom = new JSDOM(`<!DOCTYPE html><p>Hello world</p>`, {
-  url: 'https://douyin.com'
+const dom = new JSDOM('<!DOCUMENT html><p>hello world</p>', {
+  url: 'https://live.douyin.com/',
+  userAgent:
+    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36',
 })
-// const window = dom.window
-
-let window = global
-
-var document = dom.window.document
-var params = {
-  location: {
-    href: 'https://live.douyin.com/',
-    protocol: 'https:'
-
-  },
-  navigator: {
-    userAgent:
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
-  }
+const window = dom.window
+const document = window.document
+const navigator = window.navigator
+window.toString = function () {
+  return '[object Window]'
 }
-Object.assign(window, params)
 
 var glb
-;((glb = 'undefined' == typeof window ? global : window)._$jsvmprt = function (
-  b,
-  e,
-  f
-) {
+;((glb = 'undefined' == typeof window ? global : window)._$jsvmprt = function (b, e, f) {
   function a() {
     if ('undefined' == typeof Reflect || !Reflect.construct) return !1
     if (Reflect.construct.sham) return !1
     if ('function' == typeof Proxy) return !0
     try {
-      return (
-        Date.prototype.toString.call(
-          Reflect.construct(Date, [], function () {})
-        ),
-          !0
-      )
+      return Date.prototype.toString.call(Reflect.construct(Date, [], function () {})), !0
     } catch (b) {
       return !1
     }
@@ -46,11 +28,11 @@ var glb
     return (d = a()
       ? Reflect.construct
       : function (b, e, f) {
-        var a = [null]
-        a.push.apply(a, e)
-        var d = new (Function.bind.apply(b, a))()
-        return f && c(d, f.prototype), d
-      }).apply(null, arguments)
+          var a = [null]
+          a.push.apply(a, e)
+          var d = new (Function.bind.apply(b, a))()
+          return f && c(d, f.prototype), d
+        }).apply(null, arguments)
   }
   function c(b, e) {
     return (c =
@@ -63,16 +45,12 @@ var glb
     return (
       (function (b) {
         if (Array.isArray(b)) {
-          for (var e = 0, f = new Array(b.length); e < b.length; e++)
-            f[e] = b[e]
+          for (var e = 0, f = new Array(b.length); e < b.length; e++) f[e] = b[e]
           return f
         }
       })(b) ||
       (function (b) {
-        if (
-          Symbol.iterator in Object(b) ||
-          '[object Arguments]' === Object.prototype.toString.call(b)
-        )
+        if (Symbol.iterator in Object(b) || '[object Arguments]' === Object.prototype.toString.call(b))
           return Array.from(b)
       })(b) ||
       (function () {
@@ -109,18 +87,7 @@ var glb
         return (f = f > 32767 ? -65536 + f : f)
       },
       p = function (b, e) {
-        var f = parseInt(
-          '' +
-          b[e] +
-          b[e + 1] +
-          b[e + 2] +
-          b[e + 3] +
-          b[e + 4] +
-          b[e + 5] +
-          b[e + 6] +
-          b[e + 7],
-          16
-        )
+        var f = parseInt('' + b[e] + b[e + 1] + b[e + 2] + b[e + 3] + b[e + 4] + b[e + 5] + b[e + 6] + b[e + 7], 16)
         return (f = f > 2147483647 ? 0 + f : f)
       },
       y = function (b, e) {
@@ -158,18 +125,7 @@ var glb
     r += (3 & x) << (2 * w)
   }
   ;(m += 16), (m += 8)
-  var z = parseInt(
-      '' +
-      b[m] +
-      b[m + 1] +
-      b[m + 2] +
-      b[m + 3] +
-      b[m + 4] +
-      b[m + 5] +
-      b[m + 6] +
-      b[m + 7],
-      16
-    ),
+  var z = parseInt('' + b[m] + b[m + 1] + b[m + 2] + b[m + 3] + b[m + 4] + b[m + 5] + b[m + 6] + b[m + 7], 16),
     O = z,
     E = (m += 8),
     j = v(b, (m += z))
@@ -177,14 +133,10 @@ var glb
   ;(m += 4),
     (i = {
       p: [],
-      q: []
+      q: [],
     })
   for (var A = 0; A < j; A++) {
-    for (
-      var D = l(b, m), T = (m += 2 * D[0]), $ = i.p.length, P = 0;
-      P < D[1];
-      P++
-    ) {
+    for (var D = l(b, m), T = (m += 2 * D[0]), $ = i.p.length, P = 0; P < D[1]; P++) {
       var U = l(b, T)
       i.p.push(U[1]), (T += 2 * U[0])
     }
@@ -197,13 +149,13 @@ var glb
       22: 1,
       23: 1,
       37: 1,
-      73: 1
+      73: 1,
     },
     k = {
-      72: 1
+      72: 1,
     },
     M = {
-      74: 1
+      74: 1,
     },
     H = {
       11: 1,
@@ -211,16 +163,16 @@ var glb
       24: 1,
       26: 1,
       27: 1,
-      31: 1
+      31: 1,
     },
     J = {
-      10: 1
+      10: 1,
     },
     N = {
       2: 1,
       29: 1,
       30: 1,
-      20: 1
+      20: 1,
     },
     B = [],
     W = []
@@ -262,21 +214,13 @@ var glb
         if (((x >>= 2), A < 1)) {
           A = 3 & x
           if (((x >>= 2), A > 2))
-            (A = x) > 10
-              ? (S[++R] = void 0)
-              : A > 1
-                ? ((C = S[R--]), (S[R] = S[R] >= C))
-                : A > -1 && (S[++R] = null)
+            (A = x) > 10 ? (S[++R] = void 0) : A > 1 ? ((C = S[R--]), (S[R] = S[R] >= C)) : A > -1 && (S[++R] = null)
           else if (A > 1) {
             if ((A = x) > 11) throw S[R--]
             if (A > 7) {
-              for (
-                C = S[R--], z = v(b, O), A = '', P = i.q[z][0];
-                P < i.q[z][1];
-                P++
-              )
+              for (C = S[R--], z = v(b, O), A = '', P = i.q[z][0]; P < i.q[z][1]; P++)
                 A += String.fromCharCode(r ^ i.p[P])
-                ;(O += 4), (S[R--][A] = C)
+              ;(O += 4), (S[R--][A] = C)
             } else A > 5 && (S[R] = h(S[R]))
           } else if (A > 0) {
             ;(A = x) > 8
@@ -286,7 +230,7 @@ var glb
                 : A > 4
                   ? (S[(R -= 1)] = S[R][S[R + 1]])
                   : A > 2 &&
-                  ((q = S[R--]),
+                    ((q = S[R--]),
                     (A = S[R]).x === G
                       ? A.y >= 1
                         ? (S[R] = K(b, A.c, A.l, [q], A.z, w, null, 1))
@@ -325,33 +269,16 @@ var glb
             if ((A = x) > 9);
             else if (A > 7) (C = S[R--]), (S[R] = S[R] & C)
             else if (A > 5)
-              (z = y(b, O)),
-                (O += 2),
-                (S[(R -= z)] =
-                  0 === z ? new S[R]() : d(S[R], n(S.slice(R + 1, R + z + 1))))
+              (z = y(b, O)), (O += 2), (S[(R -= z)] = 0 === z ? new S[R]() : d(S[R], n(S.slice(R + 1, R + z + 1))))
             else if (A > 3) {
               z = s(b, O)
               try {
-                if (
-                  ((t[o][2] = 1),
-                  1 == (C = G(b, O + 4, z - 3, [], c, l, null, 0))[0])
-                )
-                  return C
+                if (((t[o][2] = 1), 1 == (C = G(b, O + 4, z - 3, [], c, l, null, 0))[0])) return C
               } catch (m) {
-                if (
-                  t[o] &&
-                  t[o][1] &&
-                  1 == (C = G(b, t[o][1][0], t[o][1][1], [], c, l, m, 0))[0]
-                )
-                  return C
+                if (t[o] && t[o][1] && 1 == (C = G(b, t[o][1][0], t[o][1][1], [], c, l, m, 0))[0]) return C
               } finally {
-                if (
-                  t[o] &&
-                  t[o][0] &&
-                  1 == (C = G(b, t[o][0][0], t[o][0][1], [], c, l, null, 0))[0]
-                )
-                  return C
-                    ;(t[o] = 0), o--
+                if (t[o] && t[o][0] && 1 == (C = G(b, t[o][0][0], t[o][0][1], [], c, l, null, 0))[0]) return C
+                ;(t[o] = 0), o--
               }
               O += 2 * z - 2
             }
@@ -359,9 +286,8 @@ var glb
             if ((A = x) > 12) (S[++R] = u(b, O)), (O += 2)
             else if (A > 10) (C = S[R--]), (S[R] = S[R] << C)
             else if (A > 8) {
-              for (z = v(b, O), A = '', P = i.q[z][0]; P < i.q[z][1]; P++)
-                A += String.fromCharCode(r ^ i.p[P])
-                ;(O += 4), (S[R] = S[R][A])
+              for (z = v(b, O), A = '', P = i.q[z][0]; P < i.q[z][1]; P++) A += String.fromCharCode(r ^ i.p[P])
+              ;(O += 4), (S[R] = S[R][A])
             } else A > 6 && ((q = S[R--]), (C = delete S[R--][q]))
           } else if (A < 3) {
             ;(A = x) < 2
@@ -391,16 +317,13 @@ var glb
               : A > 5
                 ? ((z = y(b, O)), (O += 2), (S[++R] = c['$' + z]))
                 : A > 3 &&
-                ((z = s(b, O)),
-                  t[o][0] && !t[o][2]
-                    ? (t[o][1] = [O + 4, z - 3])
-                    : (t[o++] = [0, [O + 4, z - 3], 0]),
+                  ((z = s(b, O)),
+                  t[o][0] && !t[o][2] ? (t[o][1] = [O + 4, z - 3]) : (t[o++] = [0, [O + 4, z - 3], 0]),
                   (O += 2 * z - 2))
           else if (A > 1) {
             if ((A = x) < 2) {
-              for (z = v(b, O), C = '', P = i.q[z][0]; P < i.q[z][1]; P++)
-                C += String.fromCharCode(r ^ i.p[P])
-                ;(S[++R] = C), (O += 4)
+              for (z = v(b, O), C = '', P = i.q[z][0]; P < i.q[z][1]; P++) C += String.fromCharCode(r ^ i.p[P])
+              ;(S[++R] = C), (O += 4)
             } else if (A < 4)
               if (S[R--]) O += 4
               else {
@@ -423,16 +346,12 @@ var glb
                 ? ((C = S[R--]), (S[R] = S[R] + C))
                 : A < 5
                   ? ((C = S[R--]), (S[R] = S[R] == C))
-                  : A < 14 &&
-                  ((C = S[R - 1]), (q = S[R]), (S[++R] = C), (S[++R] = q))
+                  : A < 14 && ((C = S[R - 1]), (q = S[R]), (S[++R] = C), (S[++R] = q))
           } else {
             ;(A = x) < 2
               ? ((C = S[R--]), (S[R] = S[R] > C))
               : A < 9
-                ? ((z = v(b, O)),
-                  (O += 4),
-                  (q = R + 1),
-                  (S[(R -= z - 1)] = z ? S.slice(R, q) : []))
+                ? ((z = v(b, O)), (O += 4), (q = R + 1), (S[(R -= z - 1)] = z ? S.slice(R, q) : []))
                 : A < 11
                   ? ((z = y(b, O)), (O += 2), (C = S[R--]), (c[z] = C))
                   : A < 13
@@ -453,9 +372,7 @@ var glb
                     : A > 0 && ((C = S[R--]), (S[R] = S[R] < C))
           else if (A > 1) {
             ;(A = x) > 10
-              ? ((z = s(b, O)),
-                (t[++o] = [[O + 4, z - 3], 0, 0]),
-                (O += 2 * z - 2))
+              ? ((z = s(b, O)), (t[++o] = [[O + 4, z - 3], 0, 0]), (O += 2 * z - 2))
               : A > 8
                 ? ((C = S[R--]), (S[R] = S[R] ^ C))
                 : A > 6 && (C = S[R--])
@@ -483,9 +400,8 @@ var glb
             else if (A > 4) (C = S[R--]), (S[R] = S[R] === C)
             else if (A > 2) (C = S[R--]), (S[R] = S[R] - C)
             else if (A > 0) {
-              for (z = v(b, O), A = '', P = i.q[z][0]; P < i.q[z][1]; P++)
-                A += String.fromCharCode(r ^ i.p[P])
-                ;(A = +A), (O += 4), (S[++R] = A)
+              for (z = v(b, O), A = '', P = i.q[z][0]; P < i.q[z][1]; P++) A += String.fromCharCode(r ^ i.p[P])
+              ;(A = +A), (O += 4), (S[++R] = A)
             }
           }
         }
@@ -540,20 +456,11 @@ var glb
           } else if (A < 3) {
             if ((A = x) > 11) throw S[R--]
             if (A > 7) {
-              for (
-                C = S[R--], z = W[O], A = '', P = i.q[z][0];
-                P < i.q[z][1];
-                P++
-              )
-                A += String.fromCharCode(r ^ i.p[P])
-                ;(O += 4), (S[R--][A] = C)
+              for (C = S[R--], z = W[O], A = '', P = i.q[z][0]; P < i.q[z][1]; P++) A += String.fromCharCode(r ^ i.p[P])
+              ;(O += 4), (S[R--][A] = C)
             } else A > 5 && (S[R] = h(S[R]))
           } else {
-            ;(A = x) < 1
-              ? (S[++R] = null)
-              : A < 3
-                ? ((C = S[R--]), (S[R] = S[R] >= C))
-                : A < 12 && (S[++R] = void 0)
+            ;(A = x) < 1 ? (S[++R] = null) : A < 3 ? ((C = S[R--]), (S[R] = S[R] >= C)) : A < 12 && (S[++R] = void 0)
           }
         } else if (A < 2) {
           A = 3 & x
@@ -578,47 +485,24 @@ var glb
           } else if (A > 0) {
             if ((A = x) < 8) (q = S[R--]), (C = delete S[R--][q])
             else if (A < 10) {
-              for (z = W[O], A = '', P = i.q[z][0]; P < i.q[z][1]; P++)
-                A += String.fromCharCode(r ^ i.p[P])
-                ;(O += 4), (S[R] = S[R][A])
-            } else
-              A < 12
-                ? ((C = S[R--]), (S[R] = S[R] << C))
-                : A < 14 && ((S[++R] = W[O]), (O += 2))
+              for (z = W[O], A = '', P = i.q[z][0]; P < i.q[z][1]; P++) A += String.fromCharCode(r ^ i.p[P])
+              ;(O += 4), (S[R] = S[R][A])
+            } else A < 12 ? ((C = S[R--]), (S[R] = S[R] << C)) : A < 14 && ((S[++R] = W[O]), (O += 2))
           } else {
             if ((A = x) < 5) {
               z = W[O]
               try {
-                if (
-                  ((t[o][2] = 1),
-                  1 == (C = G(b, O + 4, z - 3, [], c, l, null, 0))[0])
-                )
-                  return C
+                if (((t[o][2] = 1), 1 == (C = G(b, O + 4, z - 3, [], c, l, null, 0))[0])) return C
               } catch (m) {
-                if (
-                  t[o] &&
-                  t[o][1] &&
-                  1 == (C = G(b, t[o][1][0], t[o][1][1], [], c, l, m, 0))[0]
-                )
-                  return C
+                if (t[o] && t[o][1] && 1 == (C = G(b, t[o][1][0], t[o][1][1], [], c, l, m, 0))[0]) return C
               } finally {
-                if (
-                  t[o] &&
-                  t[o][0] &&
-                  1 == (C = G(b, t[o][0][0], t[o][0][1], [], c, l, null, 0))[0]
-                )
-                  return C
-                    ;(t[o] = 0), o--
+                if (t[o] && t[o][0] && 1 == (C = G(b, t[o][0][0], t[o][0][1], [], c, l, null, 0))[0]) return C
+                ;(t[o] = 0), o--
               }
               O += 2 * z - 2
             } else
               A < 7
-                ? ((z = W[O]),
-                  (O += 2),
-                  (S[(R -= z)] =
-                    0 === z
-                      ? new S[R]()
-                      : d(S[R], n(S.slice(R + 1, R + z + 1)))))
+                ? ((z = W[O]), (O += 2), (S[(R -= z)] = 0 === z ? new S[R]() : d(S[R], n(S.slice(R + 1, R + z + 1)))))
                 : A < 9 && ((C = S[R--]), (S[R] = S[R] & C))
           }
         } else if (A < 3) {
@@ -627,10 +511,7 @@ var glb
             (A = x) < 2
               ? ((C = S[R--]), (S[R] = S[R] > C))
               : A < 9
-                ? ((z = W[O]),
-                  (O += 4),
-                  (q = R + 1),
-                  (S[(R -= z - 1)] = z ? S.slice(R, q) : []))
+                ? ((z = W[O]), (O += 4), (q = R + 1), (S[(R -= z - 1)] = z ? S.slice(R, q) : []))
                 : A < 11
                   ? ((z = W[O]), (O += 2), (C = S[R--]), (c[z] = C))
                   : A < 13
@@ -643,13 +524,11 @@ var glb
                 ? ((C = S[R--]), (S[R] = S[R] + C))
                 : A < 5
                   ? ((C = S[R--]), (S[R] = S[R] == C))
-                  : A < 14 &&
-                  ((C = S[R - 1]), (q = S[R]), (S[++R] = C), (S[++R] = q))
+                  : A < 14 && ((C = S[R - 1]), (q = S[R]), (S[++R] = C), (S[++R] = q))
           } else if (A < 3) {
             if ((A = x) < 2) {
-              for (z = W[O], C = '', P = i.q[z][0]; P < i.q[z][1]; P++)
-                C += String.fromCharCode(r ^ i.p[P])
-                ;(S[++R] = C), (O += 4)
+              for (z = W[O], C = '', P = i.q[z][0]; P < i.q[z][1]; P++) C += String.fromCharCode(r ^ i.p[P])
+              ;(S[++R] = C), (O += 4)
             } else
               A < 4
                 ? S[R--]
@@ -666,10 +545,8 @@ var glb
               : A > 5
                 ? ((z = W[O]), (O += 2), (S[++R] = c['$' + z]))
                 : A > 3 &&
-                ((z = W[O]),
-                  t[o][0] && !t[o][2]
-                    ? (t[o][1] = [O + 4, z - 3])
-                    : (t[o++] = [0, [O + 4, z - 3], 0]),
+                  ((z = W[O]),
+                  t[o][0] && !t[o][2] ? (t[o][1] = [O + 4, z - 3]) : (t[o++] = [0, [O + 4, z - 3], 0]),
                   (O += 2 * z - 2))
           }
         } else {
@@ -686,9 +563,7 @@ var glb
                     : A > 0 && ((C = S[R--]), (S[R] = S[R] < C))
           else if (A > 1) {
             ;(A = x) > 10
-              ? ((z = W[O]),
-                (t[++o] = [[O + 4, z - 3], 0, 0]),
-                (O += 2 * z - 2))
+              ? ((z = W[O]), (t[++o] = [[O + 4, z - 3], 0, 0]), (O += 2 * z - 2))
               : A > 8
                 ? ((C = S[R--]), (S[R] = S[R] ^ C))
                 : A > 6 && (C = S[R--])
@@ -709,9 +584,8 @@ var glb
             }
           } else {
             if ((A = x) < 2) {
-              for (z = W[O], A = '', P = i.q[z][0]; P < i.q[z][1]; P++)
-                A += String.fromCharCode(r ^ i.p[P])
-                ;(A = +A), (O += 4), (S[++R] = A)
+              for (z = W[O], A = '', P = i.q[z][0]; P < i.q[z][1]; P++) A += String.fromCharCode(r ^ i.p[P])
+              ;(A = +A), (O += 4), (S[++R] = A)
             } else
               A < 4
                 ? ((C = S[R--]), (S[R] = S[R] - C))
@@ -730,10 +604,7 @@ var glb
       l = (o.d = d ? d.d + 1 : 0)
     for (o['$' + l] = o, t = 0; t < l; t++) o[(r = '$' + t)] = d[r]
     for (t = 0, l = o.length = a.length; t < l; t++) o[t] = a[t]
-    return (
-      i && !B[e] && F(b, e, 2 * f),
-        B[e] ? G(b, e, f, 0, o, c, null, 1)[1] : G(b, e, f, 0, o, c, null, 0)[1]
-    )
+    return i && !B[e] && F(b, e, 2 * f), B[e] ? G(b, e, f, 0, o, c, null, 1)[1] : G(b, e, f, 0, o, c, null, 0)[1]
   }
 }),
   (glb = 'undefined' == typeof window ? global : window)._$jsvmprt(
@@ -774,10 +645,8 @@ var glb
       'undefined' != typeof Request ? Request : void 0,
       'undefined' != typeof Headers ? Headers : void 0,
       'undefined' != typeof decodeURIComponent ? decodeURIComponent : void 0,
-      'undefined' != typeof RegExp ? RegExp : void 0
-    ]
+      'undefined' != typeof RegExp ? RegExp : void 0,
+    ],
   )
 
 export default window.byted_acrawler
-
-
